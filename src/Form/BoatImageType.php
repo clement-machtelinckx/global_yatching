@@ -76,16 +76,16 @@ class BoatImageType extends AbstractType
                     new Assert\NotBlank()
                 ]
             ])
-            ->add('boat', EntityType::class, [
-                'class' => Boat::class,
-'choice_label' => 'id',
-            ])
-            ->add('submit', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary mt-4'
-                ],
-                'label' => 'Submit'
-            ])
+            // ->add('boat', EntityType::class, [
+            //     'class' => Boat::class,
+            //     'choice_label' => 'id',
+            // ])
+            // ->add('submit', SubmitType::class, [
+            //     'attr' => [
+            //         'class' => 'btn btn-primary mt-4'
+            //     ],
+            //     'label' => 'Submit'
+            // ])
         ;
     }
 

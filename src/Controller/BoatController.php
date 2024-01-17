@@ -52,8 +52,9 @@ class BoatController extends AbstractController
     public function new(Request $request, EntityManagerInterface $manager) : Response
     {
         $boat = new Boat();
+        $boat->setYear(new \DateTimeImmutable(2000-01-01));
         $form = $this->createForm(BoatType::class, $boat);
-        $boatForm = $this->createForm(BoatImageType::class, $boat);
+        // $boatForm = $this->createForm(BoatImageType::class, $boat);
 
         $form->handleRequest($request);
 
@@ -69,7 +70,7 @@ class BoatController extends AbstractController
 
         return $this->render('pages/boat/new.html.twig', [
             'form' => $form->createView(),
-            'boatForm' => $boatForm->createView()
+            // 'boatForm' => $boatForm->createView()
         ]);
     }
 

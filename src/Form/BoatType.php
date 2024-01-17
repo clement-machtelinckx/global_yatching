@@ -8,12 +8,13 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class BoatType extends AbstractType
 {
@@ -224,6 +225,11 @@ class BoatType extends AbstractType
                     'class' => 'btn btn-primary mt-4'
                 ]
             ])
+            ->add('boatImages', CollectionType::class, [
+                'entry_type' => BoatImageType::class,
+                'allow_add' => true,
+                'by_reference' => false,
+            ]);
         ;
     }
 
