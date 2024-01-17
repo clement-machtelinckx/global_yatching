@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Global - Yatching - Boat_List{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mt-4">Boat List</h1>
+    <table class="table table-hover mt-4">
+        <thead>
+            <tr class="bg-primary text-white">
+                <th scope="col">Name</th>
+                <th scope="col">LOA</th>
+                <th scope="col">Beam</th>
+                <th scope="col">Price</th>
+                <th scope="col">Builder</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for boat in boats %}
+                <tr class="table-active">
+                    <td>{{ boat.name }}</td>
+                    <td>{{ boat.loa }}</td>
+                    <td>{{ boat.beam }}</td>
+                    <td>{{ boat.price }}</td>
+                    <td>{{ boat.builder }}</td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[UniqueEntity('name')]
-#[Entity(repositoryClass: BoatRepository::class)]
+#[ORM\Entity(repositoryClass: BoatRepository::class)]
 class Boat
 {
     #[ORM\Id]
@@ -55,7 +55,7 @@ class Boat
 
     #[ORM\Column(nullable: true)]
     #[Assert\PositiveOrZero]
-    private ?int $range = null;
+    private ?int $boatRange = null;
 
     #[ORM\Column(nullable: true)]
     #[Assert\PositiveOrZero]
@@ -182,14 +182,14 @@ class Boat
         return $this;
     }
 
-    public function getRange(): ?int
+    public function getBoatRange(): ?int
     {
-        return $this->range;
+        return $this->boatRange;
     }
 
-    public function setRange(?int $range): static
+    public function setBoatRange(?int $boatRange): static
     {
-        $this->range = $range;
+        $this->boatRange = $boatRange;
 
         return $this;
     }
