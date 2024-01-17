@@ -3,28 +3,227 @@
 namespace App\Form;
 
 use App\Entity\Boat;
+use DateTimeImmutable;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 class BoatType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('loa')
-            ->add('beam')
-            ->add('draft')
-            ->add('year')
-            ->add('builder')
-            ->add('material')
-            ->add('accomodation')
-            ->add('engines')
-            ->add('boatRange')
-            ->add('cruise_speed')
-            ->add('max_speed')
-            ->add('price')
+            ->add('name', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'minlength' => 2,
+                    'maxlength' => 255,
+                ], 
+                'label' => 'Name',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\Length(['min' => 2, 'max' => 25]),
+                    new Assert\NotBlank()
+                ]
+            ])
+            ->add('loa', IntegerType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'min' => 1,
+                    'max' => 200,
+                ], 
+                'required' => false,
+                'label' => 'Length overall',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\PositiveOrZero()
+                ]
+            ])
+            ->add('beam', IntegerType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'min' => 1,
+                    'max' => 20,
+                ], 
+                'required' => false,
+                'label' => 'Beam',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\PositiveOrZero()
+                ]
+            ])
+            ->add('draft', NumberType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'min' => 0.1,
+                    'max' => 10,
+                ], 
+                'required' => false,
+                'label' => 'Draft',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\PositiveOrZero()
+                ]
+            ])
+            ->add('year', DateType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'min' => 1900,
+                    'max' => 2024,
+                ], 
+                'required' => false,
+                'label' => 'Year',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\PositiveOrZero()
+                ]
+            ])
+            ->add('builder', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'minlength' => 2,
+                    'maxlength' => 255,
+                ], 
+                'required' => false,
+                'label' => 'Builder',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\Length(['min' => 2, 'max' => 255]),
+                    new Assert\NotBlank()
+                ]
+            ])
+            ->add('material', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'minlength' => 2,
+                    'maxlength' => 255,
+                ],
+                'required' => false,
+                'label' => 'Material',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\Length(['min' => 2, 'max' => 255]),
+                    new Assert\NotBlank()
+                ]
+            ])
+            ->add('accomodation', IntegerType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'min' => 1,
+                    'max' => 20,
+                ], 
+                'required' => false,
+                'label' => 'Accomodation',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\PositiveOrZero()
+                ]
+            ])
+            ->add('engines', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'minlength' => 2,
+                    'maxlength' => 255,
+                ], 
+                'required' => false,
+                'label' => 'Engines',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\Length(['min' => 2, 'max' => 255]),
+                    new Assert\NotBlank()
+                ]
+            ])
+            ->add('boatRange', IntegerType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'min' => 1,
+                    'max' => 10000,
+                ], 
+                'required' => false,
+                'label' => 'Boat range',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\PositiveOrZero()
+                ]
+            ])
+            ->add('cruise_speed', IntegerType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'min' => 1,
+                    'max' => 50,
+                ], 
+                'required' => false,
+                'label' => 'Cruise speed',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\PositiveOrZero()
+                ]
+            ])
+            ->add('max_speed', IntegerType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'min' => 1,
+                    'max' => 50,
+                ], 
+                'required' => false,
+                'label' => 'Max speed',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\PositiveOrZero()
+                ]
+            ])
+            ->add('price', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'min' => 0,
+                    'max' => 255,
+                ], 
+                'required' => false,
+                'label' => 'Price',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\Type(['type' => 'numeric']),
+                    new Assert\PositiveOrZero()
+                ]
+            ])
+            ->add('sumbit', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn btn-primary mt-4'
+                ]
+            ])
         ;
     }
 

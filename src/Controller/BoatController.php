@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Boat;
+use App\Form\BoatType;
 use App\Repository\BoatRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +24,7 @@ class BoatController extends AbstractController
     }
 
 
+    #[Route('/boat/new', name: 'boat.new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $manager) : Response
     {
         $boat = new Boat();
@@ -31,12 +33,13 @@ class BoatController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // dd($form);
             $manager->persist($boat);
             $manager->flush();
 
             $this->addFlash('success', 'Le bateau a bien été ajouté');
 
-            return $this->redirectToRoute('boat.index');
+            return $this->redirectToRoute('boat.list');
         }
 
         return $this->render('pages/boat/new.html.twig', [
