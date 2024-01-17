@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BoatRepository;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -68,6 +70,14 @@ class Boat
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(min: 2, max: 255)]
     private ?string $price = null;
+
+    #[ORM\OneToMany(mappedBy: 'Boat', targetEntity: BoatImage::class)]
+    private Collection $boatImages;
+
+    public function __construct()
+    {
+        $this->boatImages = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -226,6 +236,36 @@ class Boat
     public function setPrice(?string $price): static
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BoatImage>
+     */
+    public function getBoatImages(): Collection
+    {
+        return $this->boatImages;
+    }
+
+    public function addBoatImage(BoatImage $boatImage): static
+    {
+        if (!$this->boatImages->contains($boatImage)) {
+            $this->boatImages->add($boatImage);
+            $boatImage->setBoat($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBoatImage(BoatImage $boatImage): static
+    {
+        if ($this->boatImages->removeElement($boatImage)) {
+            // set the owning side to null (unless already changed)
+            if ($boatImage->getBoat() === $this) {
+                $boatImage->setBoat(null);
+            }
+        }
 
         return $this;
     }

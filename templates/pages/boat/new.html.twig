@@ -9,7 +9,8 @@
 
 
 
-    {{ form_start(form) }}
+    {{ form_start (form)}}
+
 
     <div class="form-group">
         {{ form_label(form.name) }}
@@ -102,6 +103,31 @@
         {{ form_errors(form.price) }}
         </div>
     </div>
+
+    <h2 class="mt-4">upload images</h2>
+
+    <div class="form-group">
+        {{ form_label(boatForm.imageName) }}
+        {{ form_widget(boatForm.imageName) }}
+        <div class="form-error">
+        {{ form_errors(boatForm.imageName) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(boatForm.imageFile) }}
+        {{ form_widget(boatForm.imageFile) }}
+        <div class="form-error">
+        {{ form_errors(boatForm.imageFile) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(boatForm.imageSize) }}
+        {{ form_widget(boatForm.imageSize) }}
+        <div class="form-error">
+        {{ form_errors(boatForm.imageSize) }}
+        </div>
+    </div>
+    
     {{ form_end(form) }}
 </div>
 {% endblock %}

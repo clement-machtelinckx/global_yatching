@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Boat;
 use App\Form\BoatType;
+use App\Form\BoatImageType;
 use App\Repository\BoatRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,6 +53,7 @@ class BoatController extends AbstractController
     {
         $boat = new Boat();
         $form = $this->createForm(BoatType::class, $boat);
+        $boatForm = $this->createForm(BoatImageType::class, $boat);
 
         $form->handleRequest($request);
 
@@ -66,7 +68,8 @@ class BoatController extends AbstractController
         }
 
         return $this->render('pages/boat/new.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'boatForm' => $boatForm->createView()
         ]);
     }
 
