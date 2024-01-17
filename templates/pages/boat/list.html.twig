@@ -5,6 +5,18 @@
 {% block body %}
 <div class="container mt-4">
     <h1 class="mt-4">Boat List</h1>
+
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success mt-4">
+        {{ message }}
+    </div>
+{% endfor %}
+{% for message in app.flashes('warning') %}
+<div class="alert alert-warning mt-4">
+    {{ message }}
+</div>
+{% endfor %}
+
     <table class="table table-hover mt-4">
         <thead>
             <tr class="bg-primary text-white">
@@ -24,6 +36,11 @@
                     <td>{{ boat.beam }}</td>
                     <td>{{ boat.price }}</td>
                     <td>{{ boat.builder }}</td>
+                    <td>
+                        <a href="{{ path('boat.show', {'id': boat.id}) }}" class="btn btn-success">Show</a>
+                        <a href="{{ path('boat.edit', {'id': boat.id}) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ path('boat.delete', {'id': boat.id}) }}" class="btn btn-danger">Delete</a>
+                    </td>
 
                 </tr>
             {% endfor %}

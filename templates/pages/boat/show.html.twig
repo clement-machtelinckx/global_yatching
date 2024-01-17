@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{%block title%}Global - Yatching - Boat_page {% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="mt-4">{{ boat.name }}</h1>
+
+    <h3 class="mt-4">section</h3>
+    <p>lenght : {{ boat.loa }}</p>
+    <p>beam : {{ boat.beam }}</p>
+    <p>draft : {{ boat.draft }}</p>
+    <p>Year : </p>
+
+    <h3 class="mt-4">shipyard</h3>
+    <p>Builder : {{ boat.builder }}</p>
+    <p>Material : {{ boat.material }}</p>
+    <p>Accomodation : {{ boat.accomodation }}</p>
+
+    <h3 class="mt-4">Propultion</h3>
+    <p>Engine : {{ boat.engines }}</p>
+    <p>Range : {{ boat.boatRange }}</p>
+    <p>Max speed : {{ boat.maxSpeed }}</p>
+    <p>Cruising speed : {{ boat.cruiseSpeed }}</p>
+
+
+
+    <a href="{{ path('boat.show', {'id': boat.id}) }}" class="btn btn-success">Show</a>
+    <a href="{{ path('boat.edit', {'id': boat.id}) }}" class="btn btn-primary">Edit</a>
+    <a href="{{ path('boat.delete', {'id': boat.id}) }}" class="btn btn-danger">Delete</a>
+
+
+
+</div>
+
+{% endblock %}
