@@ -95,7 +95,6 @@ class BoatType extends AbstractType
                     'class' => 'form-label mt-4'
                 ],
                 'constraints' => [
-                    new Assert\PositiveOrZero()
                 ]
             ])
             ->add('builder', TextType::class, [

@@ -1,36 +1,44 @@
 {% extends "base.html.twig" %}
 
-{%block title%}Global - Yatching - Boat_page {% endblock %}
+{% block title %}Global - Yatching - Boat_page{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1 class="mt-4">{{ boat.name }}</h1>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>{{ boat.name }}</h1>
 
-    <h3 class="mt-4">section</h3>
-    <p>lenght : {{ boat.loa }}</p>
-    <p>beam : {{ boat.beam }}</p>
-    <p>draft : {{ boat.draft }}</p>
-    <p>Year : </p>
+            <h3 class="mt-4">Section</h3>
+            <p>Length: {{ boat.loa }}</p>
+            <p>Beam: {{ boat.beam }}</p>
+            <p>Draft: {{ boat.draft }}</p>
+            <p>Year: {{ boat.year | date('Y') }}</p>
 
-    <h3 class="mt-4">shipyard</h3>
-    <p>Builder : {{ boat.builder }}</p>
-    <p>Material : {{ boat.material }}</p>
-    <p>Accomodation : {{ boat.accomodation }}</p>
+            <h3 class="mt-4">Shipyard</h3>
+            <p>Builder: {{ boat.builder }}</p>
+            <p>Material: {{ boat.material }}</p>
+            <p>Accommodation: {{ boat.accomodation }}</p>
 
-    <h3 class="mt-4">Propultion</h3>
-    <p>Engine : {{ boat.engines }}</p>
-    <p>Range : {{ boat.boatRange }}</p>
-    <p>Max speed : {{ boat.maxSpeed }}</p>
-    <p>Cruising speed : {{ boat.cruiseSpeed }}</p>
+            <h3 class="mt-4">Propulsion</h3>
+            <p>Engine: {{ boat.engines }}</p>
+            <p>Range: {{ boat.boatRange }}</p>
+            <p>Max speed: {{ boat.maxSpeed }}</p>
+            <p>Cruising speed: {{ boat.cruiseSpeed }}</p>
 
+            <div class="mt-4">
+                <a href="{{ path('boat.show', {'id': boat.id}) }}" class="btn btn-success">Show</a>
+                <a href="{{ path('boat.edit', {'id': boat.id}) }}" class="btn btn-primary">Edit</a>
+                <a href="{{ path('boat.delete', {'id': boat.id}) }}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
 
-
-    <a href="{{ path('boat.show', {'id': boat.id}) }}" class="btn btn-success">Show</a>
-    <a href="{{ path('boat.edit', {'id': boat.id}) }}" class="btn btn-primary">Edit</a>
-    <a href="{{ path('boat.delete', {'id': boat.id}) }}" class="btn btn-danger">Delete</a>
-
-
-
+        <div class="col-md-6">
+            <img class="m-4" src="https://picsum.photos/200/300" alt="Image 1">
+            <img class="m-4" src="https://picsum.photos/200/300" alt="Image 2">
+            <img class="m-4" src="https://picsum.photos/200/300" alt="Image 3">
+            <img class="m-4" src="https://picsum.photos/200/300" alt="Image 4">
+            <img class="m-4" src="https://picsum.photos/200/300" alt="Image 5">
+        </div>
+    </div>
 </div>
-
 {% endblock %}
