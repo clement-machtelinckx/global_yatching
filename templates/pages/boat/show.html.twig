@@ -8,11 +8,14 @@
         <div class="col-md-6">
             <h1>{{ boat.name }}</h1>
 
+            <p>{{ boat.description }}</p>
+
             <h3 class="mt-4">Section</h3>
             <p>Length: {{ boat.loa }}</p>
             <p>Beam: {{ boat.beam }}</p>
             <p>Draft: {{ boat.draft }}</p>
-            <p>Year: {{ boat.year | date('Y') }}</p>
+            <p>Year: {{ boat.year ? boat.year.format('d/m/Y') : '' }}</p>
+
 
             <h3 class="mt-4">Shipyard</h3>
             <p>Builder: {{ boat.builder }}</p>

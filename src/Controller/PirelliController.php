@@ -16,7 +16,7 @@ class PirelliController extends AbstractController
     public function index(BoatRepository $boatRepository, Request $request, PaginatorInterface $paginator): Response
     {
         $boats = $paginator->paginate(
-            $boatRepository->findByBrand('face'),
+            $boatRepository->findByBrand('pirelli'),
             $request->query->getInt('page', 1),
             5
         );

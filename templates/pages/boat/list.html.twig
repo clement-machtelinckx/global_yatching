@@ -5,6 +5,11 @@
 {% block body %}
 <div class="container mt-4">
     <h1 class="mt-4">Boat List</h1>
+    <small>
+        <div class="count mt-4">
+            <p>{{ boats.getTotalItemCount }} Ship are load </p> 
+        </div>
+    </small>
 
     {% for message in app.flashes('success') %}
     <div class="alert alert-success mt-4">

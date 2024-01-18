@@ -5,6 +5,11 @@
 {% block body %}
 <div class="container mt-4">
     <h1 class="mt-4">Face List</h1>
+    <small>
+        <div class="count mt-4">
+            <p>{{ boats.getTotalItemCount }} Ship are load</p>
+        </div>
+    </small>
 
     {% for message in app.flashes('success') %}
     <div class="alert alert-success mt-4">
@@ -64,7 +69,7 @@
         <img class="card-img-top" src="https://picsum.photos/200/300" alt="Card image cap">
         <div class="card-body">
           <h5 class="card-title">{{ boat.name }}</h5>
-          <p class="card-text">{{ boat.description }}</p>
+          <p class="card-text">{{ boat.description|slice(0, 100)~ '...' }}</p>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">{{ boat.price }} €</li>
