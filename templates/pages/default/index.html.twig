@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Global - Yatching - Pirelli{% endblock %}
+{% block title %}Global - Yatching - default{% endblock %}
 
 {% block body %}
 <div class="container mt-4">
-    <h1 class="mt-4">Pirelli List</h1>
+    <h1 class="mt-4">default List</h1>
 
     {% for message in app.flashes('success') %}
     <div class="alert alert-success mt-4">
@@ -47,6 +47,7 @@
 
                 </tr>
             {% endfor %}
+            
         </tbody>
     </table>
     <div class="navigation">
@@ -55,29 +56,29 @@
 </div>
 
 <div class="container">
-    <h1 class="mt-4">Pirelli Card</h1>
-    
-    <div class="container d-flex flex-row">
-    
-        {% for boat in boats %}
-        <div class="card m-4" style="width: 18rem;">
-            <img class="card-img-top" src="https://picsum.photos/200/300" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">{{ boat.name }}</h5>
-              <p class="card-text">{{ boat.description }}</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">{{ boat.price }} €</li>
-              <li class="list-group-item">{{ boat.builder }}</li>
-              <li class="list-group-item">{{ boat.engines }}</li>
-            </ul>
-            <div class="card-body">
-                <a href="{{ path('boat.show', {'id': boat.id}) }}" class="btn btn-success">Show</a>
-    
-            </div>
-          </div>
-          {% endfor %}
-    </div>
-    </div>
+<h1 class="mt-4">default Card</h1>
 
+<div class="container d-flex flex-row">
+
+    {% for boat in boats %}
+    <div class="card m-4" style="width: 18rem;">
+        <img class="card-img-top" src="https://picsum.photos/200/300" alt="{{ boat.name }}{{ boat.id }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ boat.name }}</h5>
+          <p class="card-text">{{ boat.description }}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{ boat.price }} €</li>
+          <li class="list-group-item">{{ boat.builder }}</li>
+          <li class="list-group-item">{{ boat.engines }}</li>
+        </ul>
+        <div class="card-body">
+            <a href="{{ path('boat.show', {'id': boat.id}) }}" class="btn btn-success">Show</a>
+
+        </div>
+      </div>
+      {% endfor %}
+
+</div>
+</div>
 {% endblock %}

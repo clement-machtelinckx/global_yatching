@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 class BoatController extends AbstractController
 {
@@ -24,9 +26,13 @@ class BoatController extends AbstractController
      * @return Response
      */
     #[Route('/boat/list', name: 'boat.list', methods: ['GET'])]
-    public function index(BoatRepository $boatRepository, Request $request): Response
+    public function index(BoatRepository $boatRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        $boats = $boatRepository->findAll();
+        $boats = $paginator->paginate(
+            $boatRepository->findAll(),
+            $request->query->getInt('page', 1),
+            5
+        );
 
         return $this->render('pages/boat/list.html.twig', [
             'boats' => $boats
