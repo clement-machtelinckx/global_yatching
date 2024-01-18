@@ -8,14 +8,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class PirelliController extends AbstractController
+class OceaController extends AbstractController
 {
-    #[Route('/pirelli', name: 'pirelli')]
+    #[Route('/ocea', name: 'ocea')]
     public function index(BoatRepository $boatRepository, Request $request): Response
     {
-        $boats = $boatRepository->findByBrand('Pirelli');
+        $boats = $boatRepository->findByBrand('ocea');
 
-        return $this->render('pages/pirelli/index.html.twig', [
+        return $this->render('pages/ocea/index.html.twig', [
             'boats' => $boats
         ]);
     }

@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class BoatType extends AbstractType
@@ -218,6 +219,7 @@ class BoatType extends AbstractType
                     new Assert\PositiveOrZero()
                 ]
             ])
+
             ->add('brand', ChoiceType::class, [
                 'choices' => [
                     'default' => "default",
@@ -233,6 +235,17 @@ class BoatType extends AbstractType
                 'attr' => [
                     'class' => 'form-select'
                 ]
+            ])
+            ->add('description', TextareaType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+
+                ], 
+                'required' => false,
+                'label' => 'Description',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
             ])
             ->add('sumbit', SubmitType::class, [
                 'attr' => [

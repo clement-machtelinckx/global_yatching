@@ -5,6 +5,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BoatRepository;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -71,11 +72,18 @@ class Boat
     #[Assert\Length(min: 2, max: 255)]
     private ?string $price = null;
 
-    #[ORM\OneToMany(mappedBy: 'Boat', targetEntity: BoatImage::class)]
-    private Collection $boatImages;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
 
     #[ORM\Column(length: 255)]
     private ?string $brand = null;
+
+    #[ORM\OneToMany(mappedBy: 'Boat', targetEntity: BoatImage::class)]
+    private Collection $boatImages;
+
+
+
+
 
     public function __construct()
     {
@@ -243,6 +251,30 @@ class Boat
         return $this;
     }
 
+    public function getBrand(): ?string
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(string $brand): static
+    {
+        $this->brand = $brand;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, BoatImage>
      */
@@ -273,15 +305,5 @@ class Boat
         return $this;
     }
 
-    public function getBrand(): ?string
-    {
-        return $this->brand;
-    }
 
-    public function setBrand(string $brand): static
-    {
-        $this->brand = $brand;
-
-        return $this;
-    }
 }
