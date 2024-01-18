@@ -225,11 +225,11 @@ class BoatType extends AbstractType
                     'class' => 'btn btn-primary mt-4'
                 ]
             ])
-            ->add('boatImages', CollectionType::class, [
-                'entry_type' => BoatImageType::class,
-                'allow_add' => true,
-                'by_reference' => false,
-            ]);
+            // ->add('boatImages', CollectionType::class, [
+            //     'entry_type' => BoatImageType::class,
+            //     'allow_add' => true,
+            //     'by_reference' => false,
+            // ]);
         ;
     }
 

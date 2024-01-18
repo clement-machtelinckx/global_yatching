@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Boat;
 use App\Form\BoatType;
+use App\Entity\BoatImage;
 use App\Form\BoatImageType;
 use App\Repository\BoatRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -83,14 +84,22 @@ class BoatController extends AbstractController
      * @return Response
      */
     #[Route('/boat/edit/{id}', name: 'boat.edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Boat $boat, EntityManagerInterface $manager) : Response
+    public function edit(Boat $boat, Request $request, EntityManagerInterface $manager) : Response
     {
+        // $boat = new Boat();
+        // dd($boat);
+        
+        // $formOptions = [
+        //     'data' => $boat, // Définissez les données du formulaire comme le bateau existant
+        //     // ... d'autres options du formulaire
+        // ];
         $form = $this->createForm(BoatType::class, $boat);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // dd($form);
+            $boat = $form->getData();
             $manager->persist($boat);
             $manager->flush();
 
@@ -100,7 +109,33 @@ class BoatController extends AbstractController
         }
 
         return $this->render('pages/boat/edit.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/boat/upload/{id}', name: 'boat.upload', methods: ['GET', 'POST'])]
+    public function uploadImages(Boat $boat, BoatImage $boatImage,Request $request, EntityManagerInterface $manager) : Response
+    {
+        $boatImage = new BoatImage();
+        $boat -> get->this->boatImage();
+        $boatForm = $this->createForm(BoatImageType::class, $boatImage);
+        // dd($boat);
+        // dd($boatImage);
+        $boatForm->handleRequest($request);
+
+        if ($boatForm->isSubmitted() && $boatForm->isValid()) {
+            // dd($form);
+            $boatImage = $boatForm->getData();
+            $manager->persist($boatImage);
+            $manager->flush();
+
+            $this->addFlash('success', 'Les image on bien été rajouter');
+
+            return $this->redirectToRoute('boat.list');
+        }
+
+        return $this->render('pages/boat/upload.html.twig', [
+            'form' => $boatForm->createView(),
         ]);
     }
 
