@@ -128,6 +128,15 @@
         {{ form_errors(form.price) }}
         </div>
     </div>
+    <div class="form-group">
+        {{ form_label(form.brand) }}
+        <div class="border border-dark">
+        {{ form_widget(form.brand) }}
+        </div>
+        <div class="form-error">
+        {{ form_errors(form.brand) }}
+        </div>
+    </div>
     {{ form_end(form) }}
 </div>
 {% endblock %}

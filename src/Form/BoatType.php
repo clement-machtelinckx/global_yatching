@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -109,7 +110,6 @@ class BoatType extends AbstractType
                 ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 255]),
-                    new Assert\NotBlank()
                 ]
             ])
             ->add('material', TextType::class, [
@@ -125,7 +125,6 @@ class BoatType extends AbstractType
                 ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 255]),
-                    new Assert\NotBlank()
                 ]
             ])
             ->add('accomodation', IntegerType::class, [
@@ -156,7 +155,6 @@ class BoatType extends AbstractType
                 ],
                 'constraints' => [
                     new Assert\Length(['min' => 2, 'max' => 255]),
-                    new Assert\NotBlank()
                 ]
             ])
             ->add('boatRange', IntegerType::class, [
@@ -220,9 +218,25 @@ class BoatType extends AbstractType
                     new Assert\PositiveOrZero()
                 ]
             ])
+            ->add('brand', ChoiceType::class, [
+                'choices' => [
+                    'default' => "default",
+                    'OCEA' => "OCEA",
+                    'Pirelli' => "Pirelli",
+                    'Face' => "Face",
+                    'occasion' => "occasion",
+                ],
+                'label' => 'brand',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'attr' => [
+                    'class' => 'form-select'
+                ]
+            ])
             ->add('sumbit', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-primary mt-4'
+                    'class' => 'btn btn-primary mt-4 mb-4'
                 ]
             ])
             // ->add('boatImages', CollectionType::class, [

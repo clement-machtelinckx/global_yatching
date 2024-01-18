@@ -74,6 +74,9 @@ class Boat
     #[ORM\OneToMany(mappedBy: 'Boat', targetEntity: BoatImage::class)]
     private Collection $boatImages;
 
+    #[ORM\Column(length: 255)]
+    private ?string $brand = null;
+
     public function __construct()
     {
         $this->boatImages = new ArrayCollection();
@@ -266,6 +269,18 @@ class Boat
                 $boatImage->setBoat(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBrand(): ?string
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(string $brand): static
+    {
+        $this->brand = $brand;
 
         return $this;
     }

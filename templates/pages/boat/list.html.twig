@@ -25,6 +25,7 @@
                 <th scope="col">Beam</th>
                 <th scope="col">Price</th>
                 <th scope="col">Builder</th>
+                <th scope="col">Brand</th>
                 <th scope="col">Actions</th>
 
             </tr>
@@ -37,6 +38,7 @@
                     <td>{{ boat.beam }}</td>
                     <td>{{ boat.price }}</td>
                     <td>{{ boat.builder }}</td>
+                    <td>{{ boat.brand }}</td>
                     <td>
                         <a href="{{ path('boat.show', {'id': boat.id}) }}" class="btn btn-success">Show</a>
                         <a href="{{ path('boat.edit', {'id': boat.id}) }}" class="btn btn-primary">Edit</a>

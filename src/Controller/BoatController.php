@@ -56,7 +56,7 @@ class BoatController extends AbstractController
         $boat->setYear(new \DateTimeImmutable(2000-01-01));
         $form = $this->createForm(BoatType::class, $boat);
         // $boatForm = $this->createForm(BoatImageType::class, $boat);
-
+        $boat ->setBrand('default');
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

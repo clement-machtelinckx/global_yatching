@@ -21,6 +21,18 @@ class BoatRepository extends ServiceEntityRepository
         parent::__construct($registry, Boat::class);
     }
 
+
+    // BoatRepository.php
+    public function findByBrand(string $brand): array
+    {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.brand = :brand')
+            ->setParameter('brand', $brand)
+            ->orderBy('b.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+}
+
 //    /**
 //     * @return Boat[] Returns an array of Boat objects
 //     */

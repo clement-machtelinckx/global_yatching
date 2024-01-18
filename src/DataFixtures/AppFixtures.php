@@ -15,7 +15,7 @@ class AppFixtures extends Fixture
 
         for ( $i = 0;$i < 10; $i++){
 
-        // Boat (name, loa, beam, draft, year, builder, material, accomodation, engines, boatRange, cruiseSpeed, maxSpeed, price
+        // Boat (name, loa, beam, draft, year, builder, material, accomodation, engines, boatRange, cruiseSpeed, maxSpeed, price, brand)
         $boat = new Boat();
         $boat->setName('Bateau 1');
         $boat->setLoa(mt_rand(0, 100));
@@ -30,6 +30,7 @@ class AppFixtures extends Fixture
         $boat->setCruiseSpeed(mt_rand(15, 20));
         $boat->setMaxSpeed(mt_rand(20, 25));
         $boat->setPrice(mt_rand(10000, 1000000));
+        $boat->setBrand('Brand 1');
 
         $manager->persist($boat);
         }
