@@ -11,6 +11,25 @@
         </div>
     </small>
 
+    
+    <form method="get" action="{{ path('boat.list') }}" class="mb-4">
+        <div class="form-group">
+            {{ form_label(form.brand) }}
+            <div class="border border-dark">
+                {{ form_widget(form.brand) }}
+            </div>
+            <div class="form-error">
+                {{ form_errors(form.brand) }}
+            </div>
+        </div>
+        <small>
+            <p class="text-danger">this fonctionality is not working atm </p>
+        </small>
+
+        <button type="submit" class="btn btn-primary mt-4">Filter</button>
+    </form>
+
+
     {% for message in app.flashes('success') %}
     <div class="alert alert-success mt-4">
         {{ message }}

@@ -18,9 +18,19 @@ use Knp\Component\Pager\PaginatorInterface;
 class BoatController extends AbstractController
 {
 
+    public function filterBoatsByBrand(BoatRepository $boatRepository, ?string $brand): array
+    {
+        if ($brand === null) {
+            // Si la marque est null, retournez tous les bateaux
+            return $boatRepository->findAll();
+        }
+    
+        return $boatRepository->findByBrand($brand);
+    }
+    
+
     /**
      * this controller display the list of all Boat
-     *
      * @param BoatRepository $boatRepository
      * @param Request $request
      * @return Response
@@ -28,16 +38,34 @@ class BoatController extends AbstractController
     #[Route('/boat/list', name: 'boat.list', methods: ['GET'])]
     public function index(BoatRepository $boatRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        $boats = $paginator->paginate(
-            $boatRepository->findAll(),
-            $request->query->getInt('page', 1),
-            5
-        );
+        // selector shit not working will check this shit latter 
+        
+        $form = $this->createForm(BoatType::class);
+        $form->handleRequest($request);
+    
+        // Vérifie si le formulaire a été soumis et est valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            $brand = $form->get('brand')->getData();
 
+            // dd($boatRepository->findByBrand($brand)->getQuery()->getSQL());
+
+            $boats = $this->filterBoatsByBrand($boatRepository, $brand);
+        } else {
+            // Si le formulaire n'est pas soumis, affiche tous les bateaux
+            $boats = $paginator->paginate(
+                $boatRepository->findAll(),
+                $request->query->getInt('page', 1),
+                5
+            );
+        }
+    
         return $this->render('pages/boat/list.html.twig', [
-            'boats' => $boats
+            'boats' => $boats,
+            'form' => $form->createView(),
         ]);
     }
+    
+    
 
     #[Route('/boat/show/{id}', name: 'boat.show', methods: ['GET'])]
     public function show(Boat $boat): Response

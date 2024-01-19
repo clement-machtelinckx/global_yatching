@@ -22,16 +22,21 @@ class BoatRepository extends ServiceEntityRepository
     }
 
 
-    // BoatRepository.php
-    public function findByBrand(string $brand): array
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.brand = :brand')
-            ->setParameter('brand', $brand)
-            ->orderBy('b.id', 'ASC')
-            ->getQuery()
-            ->getResult();
+    // BoatRepository.php// BoatRepository.php
+// BoatRepository.php
+public function findByBrand(?string $brand): array
+{
+    $query = $this->createQueryBuilder('b')
+        ->andWhere('b.brand = :brand')
+        ->setParameter('brand', $brand)
+        ->orderBy('b.id', 'ASC')
+        ->getQuery();
+
+    return $query->getResult();
 }
+
+
+
 
 //    /**
 //     * @return Boat[] Returns an array of Boat objects
