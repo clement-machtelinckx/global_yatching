@@ -7,12 +7,13 @@ use App\Form\BoatType;
 use App\Entity\BoatImage;
 use App\Form\BoatImageType;
 use App\Repository\BoatRepository;
+use App\Repository\BoatImageRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Knp\Component\Pager\PaginatorInterface;
 
 
 class BoatController extends AbstractController
@@ -66,10 +67,14 @@ class BoatController extends AbstractController
     
 
     #[Route('/boat/show/{id}', name: 'boat.show', methods: ['GET'])]
-    public function show(Boat $boat): Response
+    public function show(Boat $boat, BoatImage $boatImages, BoatImageRepository $boatImageRepository): Response
     {
+
+        $boatImages = $boatImageRepository->findBy(['boat' => $boat]);
+
         return $this->render('pages/boat/show.html.twig', [
-            'boat' => $boat
+            'boat' => $boat,
+            'boatImages' => $boatImages
         ]);
     }
 

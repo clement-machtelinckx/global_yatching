@@ -41,6 +41,19 @@
             <img class="m-4" src="https://picsum.photos/200/300" alt="Image 3">
             <img class="m-4" src="https://picsum.photos/200/300" alt="Image 4">
             <img class="m-4" src="https://picsum.photos/200/300" alt="Image 5">
+            <style>
+                .boat-image {
+                    width: 400px; /* Remplacez par la largeur souhaitée */
+                    height: 300px; /* Remplacez par la hauteur souhaitée */
+                    object-fit: cover; /* Pour conserver les proportions de l'image */
+                }
+            </style>
+            
+            <div class="col-md-6">
+                {% for boatImage in boatImages %}
+                    <img class="m-4 boat-image" src="{{ vich_uploader_asset(boatImage, 'imageFile') }}" alt="Image {{ loop.index }}">
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
