@@ -39,11 +39,9 @@ class BoatController extends AbstractController
     public function index(BoatRepository $boatRepository, Request $request, PaginatorInterface $paginator): Response
     {
         // selector shit not working will check this shit latter 
-        
         $form = $this->createForm(BoatType::class);
         $form->handleRequest($request);
     
-        // Vérifie si le formulaire a été soumis et est valide
         if ($form->isSubmitted() && $form->isValid()) {
             $brand = $form->get('brand')->getData();
 
@@ -147,31 +145,7 @@ class BoatController extends AbstractController
         ]);
     }
 
-    #[Route('/boat/upload/{id}', name: 'boat.upload', methods: ['GET', 'POST'])]
-    public function uploadImages(Boat $boat, BoatImage $boatImage,Request $request, EntityManagerInterface $manager) : Response
-    {
-        $boatImage = new BoatImage();
-        $boat -> get->this->boatImage();
-        $boatForm = $this->createForm(BoatImageType::class, $boatImage);
-        // dd($boat);
-        // dd($boatImage);
-        $boatForm->handleRequest($request);
 
-        if ($boatForm->isSubmitted() && $boatForm->isValid()) {
-            // dd($form);
-            $boatImage = $boatForm->getData();
-            $manager->persist($boatImage);
-            $manager->flush();
-
-            $this->addFlash('success', 'Les image on bien été rajouter');
-
-            return $this->redirectToRoute('boat.list');
-        }
-
-        return $this->render('pages/boat/upload.html.twig', [
-            'form' => $boatForm->createView(),
-        ]);
-    }
 
 
 

@@ -48,34 +48,28 @@ class BoatImageType extends AbstractType
                     new Assert\NotBlank()
                 ]
             ])
-            ->add('imageSize', IntegerType::class, [
+            ->add('submit', SubmitType::class, [
                 'attr' => [
-                    'class' => 'form-control',
-                    'min' => 1,
-                    'max' => 200,
-                ], 
-                'required' => false,
-                'label' => 'Image size',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
+                    'class' => 'btn btn-primary mt-4'
                 ],
-                'constraints' => [
-                    new Assert\PositiveOrZero()
-                ]
+                'label' => 'Submit'
             ])
-            ->add('updatedAt', DateType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ], 
-                'required' => false,
-                'label' => 'Updated at',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank()
-                ]
-            ])
+            // ->add('imageSize', IntegerType::class, [
+            //     'attr' => [
+            //         'class' => 'form-control',
+            //         'min' => 1,
+            //         'max' => 200,
+            //     ], 
+            //     'required' => false,
+            //     'label' => 'Image size',
+            //     'label_attr' => [
+            //         'class' => 'form-label mt-4'
+            //     ],
+            //     'constraints' => [
+            //         new Assert\PositiveOrZero()
+            //     ]
+            // ])
+
             // ->add('boat', EntityType::class, [
             //     'class' => Boat::class,
             //     'choice_label' => 'id',
