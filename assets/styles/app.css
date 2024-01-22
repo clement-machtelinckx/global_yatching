@@ -1,3 +1,8 @@
 body {
     background-color: rgb(255, 255, 255);
 }
+.boat-image {
+    width: 400px; /* Remplacez par la largeur souhaitée */
+    height: 300px; /* Remplacez par la hauteur souhaitée */
+    object-fit: cover; /* Pour conserver les proportions de l'image */
+}
