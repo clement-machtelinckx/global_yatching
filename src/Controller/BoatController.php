@@ -44,13 +44,15 @@ class BoatController extends AbstractController
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
+            dd('Form submitted');
             $brand = $form->get('brand')->getData();
-
             // dd($boatRepository->findByBrand($brand)->getQuery()->getSQL());
+
 
             $boats = $this->filterBoatsByBrand($boatRepository, $brand);
         } else {
             // Si le formulaire n'est pas soumis, affiche tous les bateaux
+
             $boats = $paginator->paginate(
                 $boatRepository->findAll(),
                 $request->query->getInt('page', 1),
