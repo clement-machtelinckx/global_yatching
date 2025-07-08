@@ -22,7 +22,6 @@ class BoatController extends AbstractController
     public function filterBoatsByBrand(BoatRepository $boatRepository, ?string $brand): array
     {
         if ($brand === null) {
-            // Si la marque est null, retournez tous les bateaux
             return $boatRepository->findAll();
         }
     
@@ -39,20 +38,15 @@ class BoatController extends AbstractController
     #[Route('/boat/list', name: 'boat.list', methods: ['GET'])]
     public function index(BoatRepository $boatRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        // selector shit not working will check this shit latter 
+
         $form = $this->createForm(BoatType::class);
         $form->handleRequest($request);
     
         if ($form->isSubmitted() && $form->isValid()) {
             dd('Form submitted');
             $brand = $form->get('brand')->getData();
-            // dd($boatRepository->findByBrand($brand)->getQuery()->getSQL());
-
-
             $boats = $this->filterBoatsByBrand($boatRepository, $brand);
         } else {
-            // Si le formulaire n'est pas soumis, affiche tous les bateaux
-
             $boats = $paginator->paginate(
                 $boatRepository->findAll(),
                 $request->query->getInt('page', 1),
@@ -71,9 +65,7 @@ class BoatController extends AbstractController
     #[Route('/boat/show/{id}', name: 'boat.show', methods: ['GET'])]
     public function show(Boat $boat, BoatImage $boatImages, BoatImageRepository $boatImageRepository): Response
     {
-
         $boatImages = $boatImageRepository->findBy(['boat' => $boat]);
-
         return $this->render('pages/boat/show.html.twig', [
             'boat' => $boat,
             'boatImages' => $boatImages
@@ -94,7 +86,6 @@ class BoatController extends AbstractController
         $boat = new Boat();
         $boat->setYear(new \DateTimeImmutable(2000-01-01));
         $form = $this->createForm(BoatType::class, $boat);
-        // $boatForm = $this->createForm(BoatImageType::class, $boat);
         $boat ->setBrand('default');
         $form->handleRequest($request);
 
@@ -110,7 +101,6 @@ class BoatController extends AbstractController
 
         return $this->render('pages/boat/new.html.twig', [
             'form' => $form->createView(),
-            // 'boatForm' => $boatForm->createView()
         ]);
     }
 
@@ -125,25 +115,15 @@ class BoatController extends AbstractController
     #[Route('/boat/edit/{id}', name: 'boat.edit', methods: ['GET', 'POST'])]
     public function edit(Boat $boat, Request $request, EntityManagerInterface $manager) : Response
     {
-        // $boat = new Boat();
-        // dd($boat);
-        
-        // $formOptions = [
-        //     'data' => $boat, // Définissez les données du formulaire comme le bateau existant
-        //     // ... d'autres options du formulaire
-        // ];
         $form = $this->createForm(BoatType::class, $boat);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // dd($form);
             $boat = $form->getData();
             $manager->persist($boat);
             $manager->flush();
-
             $this->addFlash('success', 'Le bateau a bien été modifié');
-
             return $this->redirectToRoute('boat.list');
         }
 
